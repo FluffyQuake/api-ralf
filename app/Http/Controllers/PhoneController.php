@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Song;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
-class SongController extends Controller
+class PhoneController extends Controller
 {
     public function index(Request $request)
     {
         $limit = $request->get('limit');
 
         if ($limit) {
-            return response()->json(Song::limit($limit)->get());
+            return response()->json(Phone::limit($limit)->get());
         }
 
-        return response()->json(Song::get());
+        return response()->json(Phone::get());
     }
 
     public function store(Request $request)
@@ -27,33 +27,33 @@ class SongController extends Controller
             'image_url' => 'required|url',
         ]);
 
-        $song = Song::create($request->all());
+        $phone = Phone::create($request->all());
 
-        return response()->json($song);
+        return response()->json($phone);
     }
 
-    public function show(Song $song)
+    public function show(Phone $phone)
     {
-        return response()->json($song);
+        return response()->json($phone);
     }
 
-    public function update(Request $request, song $song)
+    public function update(Request $request, phone $phone)
     {
         $request->validate([
             'title' => 'required|string',
             'artist' => 'required|string',
         ]);
 
-        $song->update($request->all());
+        $phone->update($request->all());
 
-        return response()->json($song);
+        return response()->json($phone);
     }
 
-    public function destroy(song $song)
+    public function destroy(phone $phone)
     {
-        $song->delete();
+        $phone->delete();
 
-        return response()->json(['message' => 'Song deleted']);
+        return response()->json(['message' => 'Phone deleted']);
     }
 
 }
